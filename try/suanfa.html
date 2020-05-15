@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myDiv">
+        <input type="button" value="Click Me" id="myBtn">
+    </div>
+</body>
+<script type="text/javascript">
+    let btn = document.getElementById("myBtn");
+    btn.onclick = function(){
+        btn.onclick=null;
+      //因为这个
+      document.getElementById("myDiv").innerHTML = "xxxx";  
+    };
+function *generator2(num1,num2){
+    alert(num1+'and'+num2);
+    yield num1;
+    alert(12);
+    yield 12;
+    alert(6);
+    return 6;
+    alert(5);
+    yield 10;
+}
+let generatorObj2=generator2(1,2);
+let num1=generatorObj2.next();
+console.log(num1);
+let a=generatorObj2.next();
+console.log(a);
+let last=generatorObj2.next();
+console.log(last);
+let last1=generatorObj2.next();
+console.log(last1);
+</script>
+<style>
+#a{
+    width:0px;
+    height:0px;
+    border-left:transparent;
+    border-right:transparent;
+    border-bottom:solid yellow 10px;
+    
+}
+</style>
+</html>

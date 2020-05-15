@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 用js实现一个用户行收集器，功能如下：
+    1，收集用户在页面中的所有click行为，并使用log方法发送日志，包含触发事件的节点xpath信息
+    2，xpath需包含tagName、id、class、同级同名节点索引(从1开始)，如 -->
+    
+    <!-- 点击target link时，xpath为 body[1]/div[1][@id=“container”]/a[2][@id=“link2”][contains(@class,
+    “link-class")][contains(@class, “current")] -->
+    
+    <!-- 3，不侵入、不影响其他业务代码的执行 -->
+
+
+    <div id=“container”>
+        <p>something</p>
+        <a id=“link1” class=“link-class”></a>
+        <a id=“link2” class=“link-class current”>target link</a>
+    </div>
+</body>
+<script>
+    var obody=document.getElementsByTagName('body')[0];
+    obody.addEventListener('click',function(e){
+        console.log('1');
+        console.log(getXPath(e.target));
+
+    })
+
+    function getXPath(target){
+        if(target.nodeName=='BODY') return 'body[1]';
+        var index=1;
+        var str='';
+        var tempTarget=target;
+        var nodeName=target.nodeName;
+        var id=target.id;
+        var classList=target.classList;
+        while(tempTarget.previousElementSilblig!=null){
+            if(tempTarget.previousElementSilbling.nodeName==nodeName){
+                index++;
+                console.log(index);
+            }
+            tempTarget=tempTarget.previousElementSilblig;
+        }
+
+        str='/'+nodeName.toLowerCase()+'['+index+']';
+        if(id){
+            str+='[@id="'+id+'"]';
+        }
+        classList.forEach(function(ele,index,self){
+            str+='[contains(@class,"'+ele+'")]';
+        })
+        return getXPath(target.parentNode)+str;
+    }
+</script>
+</html>
