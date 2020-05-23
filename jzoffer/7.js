@@ -1,0 +1,16 @@
+function Fibonacci(n)
+{
+    // write code here
+    if(n==0) return 0;
+    if(n==1) return 1;
+    var a=0;
+    var b=1;
+    var c=0;
+    for(let i=2;i<=n;i++){
+        c=a+b;
+        a=b;
+        b=c;
+    }
+    return c;
+    
+}
